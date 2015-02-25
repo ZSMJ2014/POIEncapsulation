@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface IRowReader {
 
-    public void getRows(int sheetIndex,int curRow,List<String> rowlist);
+    public void getRows(String sheetName,int curRow,List<String> rowlist);
 }

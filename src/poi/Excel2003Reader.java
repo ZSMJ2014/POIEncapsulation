@@ -82,6 +82,7 @@ public class Excel2003Reader implements HSSFListener {
                 break;
             case BOFRecord.sid:
                 BOFRecord br=(BOFRecord)record;
+                System.out.println("BOFRecord:"+br.getType()+" "+br.getBuildYear());
                 if(br.getType()==BOFRecord.TYPE_WORKSHEET){
                     //如果需要，建立子工作薄
                     if (workbookBuildingListener!=null&&stubWorkbook==null) {
@@ -91,7 +92,9 @@ public class Excel2003Reader implements HSSFListener {
                     if(orderedBSRs==null){
                         orderedBSRs=BoundSheetRecord.orderByBofPosition(boundSheetRecords);
                     }
+                    
                     sheetName=orderedBSRs[sheetIndex].getSheetname();
+                    System.out.println("BOF:"+sheetName);
                 }
                 break;
                 case SSTRecord.sid:
@@ -188,7 +191,7 @@ public class Excel2003Reader implements HSSFListener {
                 }
             }
             lastColumnNumber=-1;
-            rowReader.getRows(sheetIndex, curRow, rowlist);
+            rowReader.getRows(sheetName, curRow, rowlist);
             rowlist.clear();
         }
     }
